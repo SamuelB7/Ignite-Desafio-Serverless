@@ -1,0 +1,6 @@
+service:
+  name: ignite-desafio-serverless
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
