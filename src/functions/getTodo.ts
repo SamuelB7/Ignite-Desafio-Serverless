@@ -7,6 +7,7 @@ export const handle = async (event) => {
     
     const { Items } = await document.query({
         TableName: "users_todos",
+        IndexName: 'userId',
         KeyConditionExpression: "userid = :userid",
         ExpressionAttributeValues: {
             ":userid": userid
