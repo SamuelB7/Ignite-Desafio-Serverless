@@ -1,5 +1,5 @@
 service: 
-  name: ignitecertificate
+  name: desafioserverless
 
 plugins:
   - serverless-offline
@@ -21,22 +21,20 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs14.x
-  region: sa-east-1
 
 functions:
-  generateCertificate:
-    handler: src/functions/generateCertificate.handle
+  postTodo:
+    handler: src/functions/postTodo.handle
     events:
     - http:
-        path: /generateCertificate
+        path: /todos/{userid}
         method: POST
         cors: true
-  verifyCertificate:
-    handler: src/functions/verifyCertificate.handle
+  getTodo:
+    handler: src/functions/getTodo.handle
     events:
       - http:
-          path: /verifyCertificate/{id}
+          path: /todos/{userid}
           method: GET
           cors: true
 
@@ -46,7 +44,7 @@ resources:
     dbCertificateUsers:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: users_certificates
+        TableName: users_todos
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
